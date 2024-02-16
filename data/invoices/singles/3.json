@@ -1,0 +1,1 @@
+{"invoice_number": "3", "invoice_quote": "100", "invoice_date_issue": "2024-02-05", "currency": "EUR", "status": true, "payments": [{"amount": "90", "date": "2024-02-15"}, {"amount": "10", "date": "2024-02-15"}]}

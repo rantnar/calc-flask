@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dodaj Płatność</title>
+</head>
+<body>
+<form method="POST">
+    Numer faktury: <input type="text" name="invoice_number"><br>
+    Kwota płatności: <input type="text" name="payment_amount"><br>
+    Data płatności: <input type="date" name="payment_date"><br>
+    <input type="submit" value="Dodaj płatność">
+</form>
+</form>
+  <table>
+    <tr>
+        <th>Numer faktury</th>
+        <th>Kwota faktury</th>
+        <th>Data wyst.</th>
+        <th>Waluta</th>
+        <th>Status</th>
+    </tr>
+    {% for invoice in invoices %}
+    <tr>
+        <td>{{ invoice.invoice_number }}</td>
+        <td>{{ invoice.invoice_quote }}</td>
+        <td>{{ invoice.invoice_date_issue }}</td>
+        <td>{{ invoice.currency }}</td>
+        <td>{{ 'Opłacona' if invoice.status else 'Nieopłacona' }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

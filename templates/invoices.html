@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wyświetl Faktury</title>
+</head>
+<body>
+    <form method="get">
+        <label for="invoice_number">Numer faktury:</label>
+        <input type="text" id="invoice_number" name="invoice_number">
+        <input type="submit" value="Filtruj">
+    </form>
+    <table id="invoices_table">
+        <!-- Tabela faktur zostanie tutaj wypełniona -->
+        <table>
+            <tr>
+              <th>Numer faktury</th>
+              <th>Wartość faktury</th>
+              <th>Data wystawienia faktury</th>
+              <th>Waluta</th>
+              <th>Kurs w dniu wystawienia</th>
+              <th>Płatności</th>
+              <th>Różnica kursowa</th> <!-- Nowa kolumna -->
+              <th>Status</th>
+            </tr>
+            {% for invoice in invoices %}
+            <tr>
+              <td>{{ invoice.invoice_number }}</td>
+              <td>{{ invoice.invoice_quote }}</td>
+              <td>{{ invoice.invoice_date_issue }}</td>
+              <td>{{ invoice.currency }}</td>
+              <td>{{ get_cached_exchange_rates(invoice.invoice_number, invoice.currency)[invoice.invoice_date_issue] }}</td>
+              <td>
+                {% for payment in invoice.payments %}
+                  Kwota: {{ payment.amount }}, Data: {{ payment.date }}, Kurs: {{ get_cached_exchange_rates(invoice.invoice_number, invoice.currency)[payment.date] }}<br>
+                {% endfor %}
+              </td>
+              <td>{{ calculate_exchange_rate_difference(invoice.invoice_number) }}</td> <!-- Wywołanie funkcji obliczającej różnicę kursową -->
+              <td>{{ 'Opłacona' if invoice.status else 'Nieopłacona' }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+    </table>
+</body>
+</html>

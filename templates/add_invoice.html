@@ -1,0 +1,22 @@
+<form method="post">
+    <label for="invoice_number">Numer faktury:</label><br>
+    <input type="text" id="invoice_number" name="invoice_number"><br>
+    <label for="invoice_quote">Kwota faktury:</label><br>
+    <input type="text" id="invoice_quote" name="invoice_quote"><br>
+    <label for="invoice_date_issue">Data wystawienia faktury:</label><br>
+    <input type="date" id="invoice_date_issue" name="invoice_date_issue"><br>
+    <label for="currency">Waluta:</label><br>
+    <select id="currency" name="currency">
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+        <option value="PLN">PLN</option>
+    </select>
+    <input type="submit" value="Wyślij">
+</form>
+
+<form method="post" action="/add_invoice" enctype="multipart/form-data">
+    <label for="json_file">Wybierz plik JSON:</label>
+    <input type="file" id="json_file" name="json_file" accept=".json">
+    <input type="submit" value="Dodaj fakturę">
+</form>
